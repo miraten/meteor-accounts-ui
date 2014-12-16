@@ -1,0 +1,108 @@
+<template name="_signUpDialogContent">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{i18n 'accounts.signUp'}}</h4>
+  </div>
+  <div class="modal-body no-padding">
+
+    {{> accountsErrors}}
+
+    <form id="formSignUp" class="smart-form">
+      <fieldset>
+        <section>
+          <label class="input"> <i class="icon-append fa fa-envelope"></i>
+            <input type="email" name="email" placeholder="{{i18n 'accounts.label_email'}}" autofocus>
+            <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipEmail'}}</b>
+          </label>
+          <div class="note note-error"></div>
+        </section>
+
+        <section>
+          <label class="input"> <i class="icon-append fa fa-user"></i>
+            <input id="username" type="text" name="username" placeholder="{{i18n 'accounts.label_username'}}">
+            <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipUsername'}}</b>
+          </label>
+          <div class="note note-error"></div>
+        </section>
+
+        <section>
+          <label class="input"> <i class="icon-append fa fa-lock"></i>
+            <input id="password" type="password" name="password" placeholder="{{i18n 'accounts.label_password'}}">
+            <b class="tooltip tooltip-bottom-right">{{i18n 'accounts.tooltipPassword'}}</b>
+          </label>
+          <div class="note note-error"></div>
+        </section>
+      </fieldset>
+
+      <fieldset>
+        <section>
+          <label class="checkbox">
+            <input type="checkbox" name="agreements" id="agreements" value="1">
+            <i></i>{{{i18n "accounts.text_agreement" 0=termsOfUseLink 1=privacyPolicyLink}}}</label>
+        </section>
+      </fieldset>
+
+      <footer>
+        <button type="submit" class="btn btn-primary btn-block">{{i18n 'accounts.signUp'}}</button>
+      </footer>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" id="signIn" class="btn btn-link pull-right">{{i18n 'accounts.signIn'}}</button>
+  </div>
+
+</template>
+
+<template name="accountsDialogTermsOfUse">
+  <!-- Modal -->
+  <div class="modal fade" id="modalTermsOfUse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">{{i18n 'accounts.label_terms_of_use'}}</h4>
+        </div>
+
+        <div class="modal-body custom-scroll terms-body">
+          {{> termsOfUse}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{i18n 'accounts.command_close'}}
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</template>
+
+<template name="accountsDialogPrivacyPolicy">
+  <!-- Modal -->
+  <div class="modal fade" id="modalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">{{i18n 'accounts.label_privacy_policy'}}</h4>
+        </div>
+
+        <div class="modal-body custom-scroll terms-body">
+          {{> privacyPolicy}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{i18n 'accounts.command_close'}}
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+</template>

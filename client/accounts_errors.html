@@ -1,0 +1,15 @@
+<template name="accountsErrors">
+  {{#if errorsCount}}
+  <div class="alert alert-danger">
+    {{#each errors}}
+      {{> accountsError}}
+    {{/each}}
+  </div>
+  {{/if}}
+</template>
+
+<template name="accountsError">
+  <div class="error">
+    {{message}}
+  </div>
+</template>
