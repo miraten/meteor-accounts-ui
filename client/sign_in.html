@@ -1,0 +1,80 @@
+<template name="_signInDialogContent">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{i18n 'accounts.signIn'}}</h4>
+  </div>
+  <div class="modal-body no-padding">
+    {{> meteorModalAlerts}}
+
+    {{#if services}} {{! if at least one service is configured }}
+      {{#if configurationLoaded}}
+        {{#if loggingIn}}
+          {{> _loginButtonsLoggingIn}}
+        {{/if}}
+        {{> allSignInServices}}
+      {{/if}}
+    {{else}}
+      <div class="no-services">{{i18n 'accounts.text_no_login_services'}}</div>
+    {{/if}}
+  </div>
+  <div class="modal-footer">
+    <button id="signUp" class="btn btn-link pull-right">{{i18n 'accounts.signUp'}}</button>
+  </div>
+</template>
+
+
+<template name="allSignInServices">
+  <div class="login-services">
+    {{#each services}}
+      {{#if isPasswordService}}
+        <div class="login-service password-service">
+          {{> passwordService}}
+        </div>
+      {{else}}
+        <div class="login-service">
+          {{> otherLoginService}}
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+
+  {{#unless hasPasswordService}}
+    {{> _loginButtonsMessages}}
+  {{/unless}}
+</template>
+
+
+<template name="passwordService">
+
+  <form id="formSignIn" class="smart-form no-padding">
+      <fieldset>
+        <section>
+          <label class="input">
+            <input name="email" type="email" placeholder="{{i18n 'accounts.usernameOrEmail'}}" autofocus>
+          </label>
+
+          <label class="input">
+            <input type="password" name="password" placeholder="{{i18n 'accounts.password'}}">
+          </label>
+          <p id="forgotPassword">{{i18n 'accounts.forgotPassword'}}</p>
+        </section>
+
+        <!-- section>
+          <label class="checkbox">
+            <input type="checkbox" name="remember" value="1" checked="checked">
+            <i></i>{{i18n 'accounts.staySignedIn'}}</label>
+        </section -->
+
+        <section>
+          <button type="submit" class="btn btn-primary btn-block" formnovalidate="formnovalidate">{{i18n 'accounts.signIn'}}</button>
+        </section>
+      </fieldset>
+
+    </form>
+</template>
+
+<template name="_loginButtonsLoggingIn">
+  <div class="loggingIn">
+    {{> spinner}}
+  </div>
+</template>
