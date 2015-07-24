@@ -1,32 +1,33 @@
 Package.describe({
   name: 'leesangwon:accounts-ui',
-  summary: 'Accounts ui',
-  version: '0.6.2',
-  git: 'https://github.com/miraten/meteor-accounts-ui'
+  version: '0.7.1',
+  summary: 'Accounts-ui for Meteor application',
+  git: '',
+  documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0');
-
-  api.use([
-    'accounts-base',
-    'sha',
-    'email',
-    'iron:router@1.0.0',
-    'leesangwon:mira-validator@0.4.1'
-  ]);
+  api.versionsFrom('1.1.0.2');
 
   api.use([
     'tracker',
+    'reactive-var',
     'service-configuration',
+    'accounts-base',
     'underscore',
     'templating',
-    'mongo-livedata',
-    'leesangwon:alerts@0.2.2',
-    'sacha:spin@2.0.4',
-    'session',], 'client');
+    'session',
+    'sacha:spin',
+    'less',
+    'leesangwon:bootstrap-less',
+    'leesangwon:alerts'
+  ], 'client');
+
   // Export Accounts (etc) to packages using this one.
-  api.imply(['accounts-base', 'templating']);
+  api.imply([
+    'accounts-base',
+    'leesangwon:i18n'
+  ], ['client', 'server']);
 
   // Allow us to call Accounts.oauth.serviceNames, if there are any OAuth
   // services.
@@ -36,38 +37,42 @@ Package.onUse(function(api) {
   api.use('accounts-password', {weak: true});
 
   api.addFiles([
-    'shared/accounts_ui.js',
-    'shared/router.js'
-  ]);
+    'accounts_ui.js',
+    'accounts_ui_templates.html',
+    'accounts_ui_templates.js',
+    'sign_in.html',
+    'sign_in.js',
+    'sign_up.html',
+    'sign_up.js',
+    'forgot_password.html',
+    'forgot_password.js',
+    'reset_password.html',
+    'reset_password.js',
+    'change_password.html',
+    'change_password.js',
+    'enroll_account.html',
+    'enroll_account.js',
+
+    'style/style.less',
+
+    'login_buttons_dialogs.html',
+    'login_buttons_dialogs.js',
+    'login_buttons_session.js'
+    ], 'client');
 
   api.addFiles([
-    'client/accounts_dialogs.html',
-    'client/sign_in.html',
-    'client/sign_up.html',
-    'client/forgot_password.html',
-    'client/verify_email.html',
-    'client/reset_password.html',
-    'client/login_services.html',
-
-    'client/login_sessions.js',
-    'client/accounts_dialogs.js',
-    'client/sign_in.js',
-    'client/sign_up.js',
-    'client/forgot_password.js',
-    'client/reset_password.js',
-    'client/accounts_errors.js',
-    'client/login_services.js'
-  ], 'client');
+    'i18n/i18n_en.js',
+    'i18n/i18n_ko.js'
+  ], ['client', 'server']);
 
   api.addFiles([
-    'server/accounts_methods.js'
-  ], 'server');
+    'startup.js'
+  ], ['client', 'server']);
 
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('leesangwon:accounts-ui');
-  api.addFiles('accounts_ui_tests.js', 'client');
+  api.addFiles('accounts-ui-tests.js');
 });
-
