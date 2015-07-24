@@ -19,7 +19,7 @@ Package.onUse(function(api) {
     'session',
     'sacha:spin',
     'less',
-    'leesangwon:bootstrap-less',
+    'leesangwon:bootstrap-less@0.9.1',
     'leesangwon:alerts'
   ], 'client');
 
